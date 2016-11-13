@@ -1,0 +1,107 @@
+kBytes = Optimize[
+  "[1]" |   "[2]" |   "[3]" |   "[4]" |   "[5]" |   "[6]" |   "[7]" |   "[8]" |   "[9]" |  "[10]" |
+ "[11]" |  "[12]" |  "[13]" |  "[14]" |  "[15]" |  "[16]" |  "[17]" |  "[18]" |  "[19]" |  "[20]" |
+ "[21]" |  "[22]" |  "[23]" |  "[24]" |  "[25]" |  "[26]" |  "[27]" |  "[28]" |  "[29]" |  "[30]" |
+ "[31]" |  "[32]" |  "[33]" |  "[34]" |  "[35]" |  "[36]" |  "[37]" |  "[38]" |  "[39]" |  "[40]" |
+ "[41]" |  "[42]" |  "[43]" |  "[44]" |  "[45]" |  "[46]" |  "[47]" |  "[48]" |  "[49]" |  "[50]" |
+ "[51]" |  "[52]" |  "[53]" |  "[54]" |  "[55]" |  "[56]" |  "[57]" |  "[58]" |  "[59]" |  "[60]" |
+ "[61]" |  "[62]" |  "[63]" |  "[64]" |  "[65]" |  "[66]" |  "[67]" |  "[68]" |  "[69]" |  "[70]" |
+ "[71]" |  "[72]" |  "[73]" |  "[74]" |  "[75]" |  "[76]" |  "[77]" |  "[78]" |  "[79]" |  "[80]" |
+ "[81]" |  "[82]" |  "[83]" |  "[84]" |  "[85]" |  "[86]" |  "[87]" |  "[88]" |  "[89]" |  "[90]" |
+ "[91]" |  "[92]" |  "[93]" |  "[94]" |  "[95]" |  "[96]" |  "[97]" |  "[98]" |  "[99]" | "[100]" |
+"[101]" | "[102]" | "[103]" | "[104]" | "[105]" | "[106]" | "[107]" | "[108]" | "[109]" | "[110]" |
+"[111]" | "[112]" | "[113]" | "[114]" | "[115]" | "[116]" | "[117]" | "[118]" | "[119]" | "[120]" |
+"[121]" | "[122]" | "[123]" | "[124]" | "[125]" | "[126]" | "[127]" | "[128]" | "[129]" | "[130]" |
+"[131]" | "[132]" | "[133]" | "[134]" | "[135]" | "[136]" | "[137]" | "[138]" | "[139]" | "[140]" |
+"[141]" | "[142]" | "[143]" | "[144]" | "[145]" | "[146]" | "[147]" | "[148]" | "[149]" | "[150]" |
+"[151]" | "[152]" | "[153]" | "[154]" | "[155]" | "[156]" | "[157]" | "[158]" | "[159]" | "[160]" |
+"[161]" | "[162]" | "[163]" | "[164]" | "[165]" | "[166]" | "[167]" | "[168]" | "[169]" | "[170]" |
+"[171]" | "[172]" | "[173]" | "[174]" | "[175]" | "[176]" | "[177]" | "[178]" | "[179]" | "[180]" |
+"[181]" | "[182]" | "[183]" | "[184]" | "[185]" | "[186]" | "[187]" | "[188]" | "[189]" | "[190]" |
+"[191]" | "[192]" | "[193]" | "[194]" | "[195]" | "[196]" | "[197]" | "[198]" | "[199]" | "[200]" |
+"[201]" | "[202]" | "[203]" | "[204]" | "[205]" | "[206]" | "[207]" | "[208]" | "[209]" | "[210]" |
+"[211]" | "[212]" | "[213]" | "[214]" | "[215]" | "[216]" | "[217]" | "[218]" | "[219]" | "[220]" |
+"[221]" | "[222]" | "[223]" | "[224]" | "[225]" | "[226]" | "[227]" | "[228]" | "[229]" | "[230]" |
+"[231]" | "[232]" | "[233]" | "[234]" | "[235]" | "[236]" | "[237]" | "[238]" | "[239]" | "[240]" |
+"[241]" | "[242]" | "[243]" | "[244]" | "[245]" | "[246]" | "[247]" | "[248]" | "[249]" | "[250]" |
+"[251]" | "[252]" | "[253]" | "[254]" | "[255]"];
+	
+sigma = kBytes;
+	
+sigma_star = sigma*;
+
+
+#Phoneticize the phonemic transcription (a.k.a. phonemic to phonetic)
+
+#aspiration transition in initial clusters
+ASP = ("p" : "pʰ") | ("t" : "tʰ") | ("c" : "cʰ") | ("k" : "kʰ");
+ASP_tran = CDRewrite[ASP, ("\." | "[BOS]" | " "), ("p" | "t" | "c" | "k" | "m" | "n" | "ɲ" | "ŋ" | "s" |  "l" | "w" | "j"), sigma_star];
+
+#schwa transition in initial clusters
+SCHWA = ("" : "ᵊ");
+C_ANY = "p" | "t" | "c" | "k" | "ʔ" | "m" | "n" | "ɲ" | "ŋ" | "s" | "h" | "l" | "w" | "j" |"r";
+SCHWA_tran = CDRewrite[SCHWA, ("\.m" | "\.l" | "[BOS]m" | "[BOS]l" | " m" | " l"), C_ANY, sigma_star]
+@ CDRewrite[SCHWA, ("\."C_ANY | "[BOS]"C_ANY | " "C_ANY), ("ɓ" | "ɗ" | "ʔ"), sigma_star];
+
+#sonorant consonants become voiceless when occur after an aspirated plosive.
+vd_to_vl = ("m" : "m̥") | ("n" : "n̥") | ("ɲ" : "ɲ̊") | ("ŋ" : "ŋ̊") | ("l" : "l̥") | ("w" : "w̥") | ("j" : "j̊");
+SON_vd_to_vl = CDRewrite[vd_to_vl, ("pʰ" | "tʰ" | "cʰ" | "kʰ"), "", sigma_star];
+
+#plosives and nasals in the final position do not have audible released.
+unrel =  ("p" : "p̚") | ("t" : "t̚") | ("c" : "c̚") | ("k" : "k̚") | ("m" : "m̚") | ("n" : "n̚") | ("ɲ" : "ɲ̚") | ("ŋ" : "ŋ̚");
+PLO_NAS_unrel = CDRewrite[unrel, "", ("\." | "[EOS]" | " "), sigma_star];
+
+R1 = ASP_tran 
+	@ SCHWA_tran 
+	@ SON_vd_to_vl 
+	@ PLO_NAS_unrel
+	;
+
+
+
+##minor syllable reduction
+#nasals dropped in minor syllable or syllabify the N /ʔVN-/ is recuded to [N̩-].
+DROP_NAS = CDRewrite[("m̚" | "n̚" | "ɲ̚" | "ŋ̚") : "", ("ɑ" | "ɔ" | "u"), "\.", sigma_star];
+
+syllabification = ("m̚" : "m̩") | ("n̚" : "n̩") | ("ɲ̚" : "ɲ̩") | ("ŋ̚" : "ŋ̩");
+#fin_NAS = "m̩" | "n̩" | "ɲ̩" | "ŋ̩";
+SYLLABIFY_NAS = CDRewrite[syllabification, ("ʔɑ" | "ʔa" | "ʔɔ" | "ʔu"), "\.", sigma_star] @ CDRewrite[("ʔɑ" | "ʔa" | "ʔɔ" | "ʔu") : "", ("[BOS]" | " "), ("m̩" | "n̩" | "ɲ̩" | "ŋ̩"), sigma_star];
+
+DROP_or_SYLLABIFY_NAS = SYLLABIFY_NAS @ DROP_NAS;
+
+#vowel reduction in minor syllable
+REDUCING_v = CDRewrite[("ɑ" | "ɔ" | "u") : "ə", "", "\.", sigma_star];
+
+#/r/ dropped in minor syllable (it has to come after REDUCING_v)
+DROP_r = CDRewrite["r" : "", C_ANY, "ə\.", sigma_star];
+
+#TODO: think about these
+#/rɔ-/ is reduced to [rə-] or [lə-]
+#/CrV-/ is recuded to [Cə-]
+
+#devoicing of initial consonant in the minor syllable
+bd_to_pt = ("ɓ" : "p") | ("ɗ" : "t");
+DEVOICING_bd_to_pt = CDRewrite[bd_to_pt, ("[BOS]" | " "), "ə\.", sigma_star];
+
+#/sɑ-/ is changed to /tə-/ in the minor syllable
+DEVOICING_s_to_t = CDRewrite[("s" : "t"), ("[BOS]" | " "), "ə\.s", sigma_star];
+
+DEVOICING_INI_MINOR_SYL = DEVOICING_bd_to_pt @ DEVOICING_s_to_t;
+
+#velar plosive becomes glottal
+#GLOTTALIZATION = CDRewrite["k" : "ʔ", "", "[EOS]", sigma_star];
+
+R2 = DROP_or_SYLLABIFY_NAS 
+	@ REDUCING_v 
+	@ DROP_r 
+	@ DEVOICING_INI_MINOR_SYL 
+	#@ GLOTTALIZATION
+	;	
+
+
+
+R_ANY = R1 @ R2;
+
+PHRASE = R_ANY (" " R_ANY)*; #accept pre-segmented input with a white space in between
+
+export TO_PHONETIC = Optimize[PHRASE];
