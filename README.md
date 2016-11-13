@@ -7,9 +7,8 @@ There are two source codes:
         <li>Thrax codes for the conversion processes</li>
     </ol> 
 
-<!-- *** You may try these out by running the Ruby codes and then feed words in each syllable group into the automator_phonemic.grm to get the phonemic transcription and then feed the phonemic transcription into the automator_phonetic.grm to get the phonetic transcription. -->
     
-<h2>Ruby Codes</h2>
+<h2><a href="https://www.ruby-lang.org/en/">Ruby Codes</a></h2>
 Data Preparation:
     <ul>     
         <li>cleanup.rb --removing stray characters, prefixes and duplicate entries</li>
@@ -20,13 +19,17 @@ Data Preparation:
         <li>data --containing 18,948 entries from Khmer-Khmer Dictionary (1967)</li>
     </ul> 
 
-<h2>Thrax Codes</h2>
+<h2><a href="http://openfst.cs.nyu.edu/twiki/bin/view/GRM/ThraxQuickTour">Thrax Codes</a></h2>
 The conversion grammars:
     <ul>     
         <li>automator_phonemic.grm</li>
         <li>automator_phonetic.grm</li>
     </ul> 
     
+<h2>Try them out</h2>
+You may try these out by first running the Ruby codes in the aforementioned order (make sure you have Ruby installed). 
+when you have all native words in their respective syllable groups, you may be able to the Thrax grammar, either the g2p one or the p2p one, on them one file at a time (make sure you have Thrax installed).
+
 <h2>Inquiry</h2>
 
 All inquiries should be redirected to <a href="mailto:makara_sok@hotmail.com">makara_sok@hotmail.com</a>.
