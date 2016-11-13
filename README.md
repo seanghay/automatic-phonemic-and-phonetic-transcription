@@ -29,7 +29,7 @@ The conversion grammars:
     
 <h2>Inquiry</h2>
 
-All inquiries should be redirected to makara_sok@hotmail.com.
+All inquiries should be redirected to <a href="mailto:makara_sok@hotmail.com">makara_sok@hotmail.com</a>.
 
 <h2>Copyright &copy; Makara Sok</h2>
 <h2>Payap University 2016</h2>
