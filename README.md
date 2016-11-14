@@ -1,5 +1,5 @@
 <h2>Introduction</h2>
-<p>This repository stores source codes used in a research project entitled: "Phonological Principles and Automatic Phonemic and Phonetic Transcription of Khmer Words" which was presented in partial fulfillment of the requirements for the degree of Master OF Arts in Linguistics at the International College of Payap University, Thailand, in 2016.</p>
+<p>This repository stores source codes used in a research project entitled: "<a href="http://ic.payap.ac.th/international-graduate/linguistics-ma/graduates-theses/">Phonological Principles and Automatic Phonemic and Phonetic Transcription of Khmer Words</a>" which was presented in partial fulfillment of the requirements for the degree of Master OF Arts in Linguistics at the International College of Payap University, Thailand, in 2016.</p>
 
 There are two source codes:
     <ol>     
@@ -22,8 +22,8 @@ Data Preparation:
 <h2><a href="http://openfst.cs.nyu.edu/twiki/bin/view/GRM/ThraxQuickTour">Thrax Codes</a></h2>
 The conversion grammars:
     <ul>     
-        <li>automator_phonemic.grm</li>
-        <li>automator_phonetic.grm</li>
+        <li>automator_phonemic.grm --taking <b>orthographic words</b> one at a time and convert it into <b>phonemic transcription</b>.</li>
+        <li>automator_phonetic.grm --taking <b>phonemic transcriptions</b> one at a time and convert it into <b>phonetic transcription</b>.</li>
     </ul> 
     
 <h2>Try them out</h2>
