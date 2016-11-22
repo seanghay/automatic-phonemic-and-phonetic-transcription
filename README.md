@@ -9,14 +9,14 @@ There are two source codes:
 
     
 <h2><a href="https://www.ruby-lang.org/en/">Ruby Codes</a></h2>
-Data Preparation:
+Data Preparation (Dataset 02):
     <ul>     
+        <li>data --containing 18,948 entries from Khmer-Khmer Dictionary (1967)</li>
         <li>cleanup.rb --removing stray characters, prefixes and duplicate entries</li>
         <li>filter1.rb --removing Pali/Sanskrit loanwords using etymological tags</li>
         <li>filter2.rb --removing P/S loanwords using diacritics and independent vowels</li>
         <li>filter3.rb --removing P/S loanwords using pronunciation field</li>
         <li>syl_group.rb --grouping native khmer words into their respective syllable groups</li>
-        <li>data --containing 18,948 entries from Khmer-Khmer Dictionary (1967)</li>
     </ul> 
 
 <h2><a href="http://openfst.cs.nyu.edu/twiki/bin/view/GRM/ThraxQuickTour">Thrax Codes</a></h2>
